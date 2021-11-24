@@ -30,7 +30,9 @@ class DeleteSourceMapWebpackPlugin {
       .forEach((name) => {
         countMatchMapAssets += 1
         const { existsAt } = stats.compilation.assets[name]
-        fs.unlinkSync(existsAt)
+        if (existsAt) {
+          fs.unlinkSync(existsAt)
+        }
       })
       console.log(`⭐⭐⭐removed source map url: ${countMatchAssets} asset(s) processed`);
       console.log(`⭐⭐⭐deleted map file: ${countMatchMapAssets} asset(s) processed`);
